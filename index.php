@@ -1,4 +1,3 @@
-<link rel="shortcut icon" type="image/png" href="../../images/firefoxLogo.png">
 <section class="main-container">
 	<div class="main-wrapper">
 		<!DOCTYPE html>
@@ -10,7 +9,6 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-					<!––<link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
 				    <title>Type To Survive</title>
 
 				    <style>
@@ -19,10 +17,7 @@
 				    		align-items: center;
 				    		justify-content: center;
 				    		background: #202020;
-                        }
-                        img[src="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"] {
-						  display: none !important;
-						}
+                        } 
 				    </style>
 
 				    <script
@@ -76,97 +71,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Highscores -->
-                    <div class="row mt-1">
-                        <div class="col-md-12">
-                            <div class="card card-body bg-dark text-white">
-                            <h5 style="text-align:center;">Highscores (WPM)</h5>
-	                            <p style="text-align:center"> 
-		                            <?php
-										include '../../vendor/autoload.php';
-										$dotenv = Dotenv\Dotenv::create(dirname(dirname(__DIR__)));
-										$dotenv->load();
-										// Online 
-										$dbServername = $_ENV['DB_SERV_NAME']; 
-										$dbUsername = $_ENV['DB_USERNAME'];
-										$dbPassword = $_ENV['DB_PASSWORD'];
-										$dbName = $_ENV['DB_NAME'];
-										$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-
-										$sql = "SELECT * FROM scores WHERE game = 'typetosurviveWPM' ORDER BY user_score DESC";
-										$result = mysqli_query($conn, $sql);
-										
-										$data = array();
-										$uniqueUsername = array();
-										while ($row = mysqli_fetch_row($result)) {
-											if(!in_array($row[0], $uniqueUsername)) {
-												$uniqueUsername[] = $row[0];
-												$data[] = $row;
-											}
-										}
-										$iterations = 0;
-										$color = array("#ffd600", "#C0C0C0", "#cd7f32");
-										foreach ($data as &$value) {
-											if($iterations == 15) {
-												return;
-											}
-											if($iterations < 3) {
-												echo '<span style="color:'.$color[$iterations].';text-align:center;">'.($iterations+1).'. ' . $value[0] . ' - ' . $value[1] . ' points</span>';
-												echo "<br>";
-											} else {
-												echo '<span style="color:#FFF;text-align:center;">'.($iterations+1).'. ' . $value[0] . ' - ' . $value[1] . ' points</span>';
-												echo "<br>";
-											}
-											$iterations++;
-										}
-									?>
-								</p>
-								<br>
-								<h5 style="text-align:center;">Highscores On Easy (Typing-Survivor)</h5>
-	                            <p style="text-align:center"> 
-		                            <?php
-										include '../../vendor/autoload.php';
-										$dotenv = Dotenv\Dotenv::create(dirname(dirname(__DIR__)));
-										$dotenv->load();
-										// Online 
-										$dbServername = $_ENV['DB_SERV_NAME']; 
-										$dbUsername = $_ENV['DB_USERNAME'];
-										$dbPassword = $_ENV['DB_PASSWORD'];
-										$dbName = $_ENV['DB_NAME'];
-										$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-
-										$sql = "SELECT * FROM scores WHERE game = 'typetosurvive' ORDER BY user_score DESC";
-										$result = mysqli_query($conn, $sql);
-										$data = array();
-										$uniqueUsername = array();
-										while ($row = mysqli_fetch_row($result)) {
-											if(!in_array($row[0], $uniqueUsername)) {
-												$uniqueUsername[] = $row[0];
-												$data[] = $row;
-											}
-										}
-										$iterations = 0;
-										$color = array("#ffd600", "#C0C0C0", "#cd7f32");
-										foreach ($data as &$value) {
-											if($iterations == 15) {
-												return;
-											}
-											if($iterations < 3) {
-												echo '<span style="color:'.$color[$iterations].';text-align:center;">'.($iterations+1).'. ' . $value[0] . ' - ' . $value[1] . ' points</span>';
-												echo "<br>";
-											} else {
-												echo '<span style="color:#FFF;text-align:center;">'.($iterations+1).'. ' . $value[0] . ' - ' . $value[1] . ' points</span>';
-												echo "<br>";
-											}
-											$iterations++;
-										}
-									?>
-								</p>
-                            </div>
-                        </div>
-                    </div>
-                    
 				</body>
 			</html>
 	</div>

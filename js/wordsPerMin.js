@@ -4,20 +4,20 @@ window.addEventListener("load", init);
 const levels = {
   easy: 150,
   medium: 150,
-  hard: 150
+  hard: 150,
 };
 
 // Globals
 var difficulty = "";
 var MYLIBRARY =
   MYLIBRARY ||
-  (function() {
+  (function () {
     var _args = {}; // private
     return {
-      init: function(Args) {
+      init: function (Args) {
         _args = Args;
         difficulty = _args[0];
-      }
+      },
     };
   })();
 
@@ -72,11 +72,7 @@ function init() {
 
 // Start match
 function startMatch() {
-  if (
-    time === currentLevel &&
-    wordInput.value.length === 1 &&
-    isPlaying === false
-  ) {
+  if (time === currentLevel && wordInput.value.length === 1 && isPlaying === false) {
     // Auto start
     countdownInterval = setInterval(countdown, 1000);
   }
@@ -168,18 +164,9 @@ function matchWords() {
     actualArray.map((element, i) => {
       let color;
       if (i < userInput.length) {
-        element === userInputArray[i]
-          ? (color = "#42f55a")
-          : (color = "#f54e42");
+        element === userInputArray[i] ? (color = "#42f55a") : (color = "#f54e42");
       }
-      actualArray[i] =
-        "<span key=" +
-        i +
-        " style='color:" +
-        color +
-        "'>" +
-        element +
-        "</span>";
+      actualArray[i] = "<span key=" + i + " style='color:" + color + "'>" + element + "</span>";
 
       if (
         element === " " &&
@@ -187,13 +174,7 @@ function matchWords() {
         actualArray.length === userInputArray.length
       ) {
         actualArray[i] =
-          "<span key=" +
-          i +
-          " style='background-color:" +
-          color +
-          "'>" +
-          element +
-          "</span>";
+          "<span key=" + i + " style='background-color:" + color + "'>" + element + "</span>";
         wordInput.style.backgroundColor = "#f54e42";
         wordInput.setAttribute("maxlength", actualArray.length);
       } else {
@@ -250,7 +231,7 @@ function countdown() {
   timeDisplay.innerHTML = time;
 }
 
-wordInput.onblur = function() {
+wordInput.onblur = function () {
   wordInput.placeholder = "Type the text above to begin...";
 };
 
@@ -312,31 +293,24 @@ function highscores() {
 
     fetch("../../../includes/scores.inc.php", {
       method: "POST",
-      body: highscoreForm
+      body: highscoreForm,
     })
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
       })
-      .then(function(scores) {
+      .then(function (scores) {
         var highscores = "";
         var i = 0;
-        scores.forEach(function(score) {
-          highscores +=
-            score[0] +
-            " " +
-            score[1] +
-            " words per minute on " +
-            score[2] +
-            "<br>";
+        scores.forEach(function (score) {
+          highscores += score[0] + " " + score[1] + " words per minute on " + score[2] + "<br>";
           i++;
           if (i > 15) {
             return;
           }
         });
-        document.getElementById("highscoreTable").innerHTML =
-          "Highscores: <br>" + highscores;
+        document.getElementById("highscoreTable").innerHTML = "Highscores: <br>" + highscores;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error(error);
       });
   }
@@ -344,7 +318,7 @@ function highscores() {
 
 const words = [
   "Having spent most of her life exploring the jungle with her parents nothing could prepare her for the most dangerous adventure ever that is high school.",
-  "A kind hearted street seller vies for the love of the beautiful princess jasmine the princess of the counry. When he finds a magic lamp he uses a genie magic power.",
+  "A kind hearted street seller vies for the love of the beautiful princess jasmine the princess of the country. When he finds a magic lamp he uses a genie magic power.",
   "A frustrated man whose musical career is going nowhere even though the faith that his manager has in him. However on the night he decides to give up the whole world.",
   "The formerly successful banker as a prisoner in the gloomy jailhouse after being found guilty of a crime he did not commit. Murdering his father he did not.",
   "The father is the head of the mafia family in the city. He is at the event of his daughters wedding. The youngest son and a decorated her is also present at the wedding.",
@@ -357,5 +331,13 @@ const words = [
   "An american teenager from the past is by accident sent back in time by a time machine invented by a very mad scientist. During his often fun and always great trip back in time.",
   "In the warm country the charming and smart millionaire who is currently doing interviews for possible employe to the position of his carer with his red haired friend.",
   "He is a high general loved by the people but is aging fast. Before his death he chooses another one to be his heir over his own son and a power struggle.",
-  "He is a city teen struggling with school friends and on top of that being the new spider man. When he comes across Parker the saviour of the city in the multiverse."
+  "He is a city teen struggling with school friends and on top of that being the new spider man. When he comes across Parker the saviour of the city in the multiverse.",
+  "He encounters a team of spider people charged with protecting its very existence. When the heroes clash on how to handle a new threat, Miles must redefine what it means to be a hero.",
+  "Armed with only one word Tenet and fighting for the survival of the entire world, a protagonist journeys through a twilight world of international espionage on a mission that will unfold.",
+  "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
+  "Set in utopian Piltover and the oppressed underground of Zaun, the story follows the origins of two iconic League of Legends champions and the power that will tear them apart.",
+  "In a dystopian future, one individual defies the oppressive regime and sparks a revolution. As hope flickers in the darkness, they become the symbol of change and freedom.",
+  "In a quiet town, a mysterious stranger arrives, unraveling secrets and stirring the residents hidden desires. As tensions escalate, they unearth a dark past that threatens to consume them all.",
+  "In the depths of space, a crew of explorers embarks on a perilous mission to uncover the truth behind an enigmatic celestial phenomenon. They soon realize they are not alone, facing a threat beyond their wildest imaginations.",
+  "In a whimsical land where imagination reigns supreme, a group of misfit toys embarks on a quest to find their purpose and prove that they are more than just playthings. Along the way, they discover the true magic of friendship and acceptance.",
 ];
